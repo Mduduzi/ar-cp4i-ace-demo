@@ -1,0 +1,22 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: ar-ace-app-demo
+  namespace: ace
+  labels:
+    app: ar-ace-app-demo
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/Mduduzi/ar-cp4i-ace-demo.git
+    contextDir: .
+  strategy:
+    type: Docker                      
+    dockerStrategy:
+      dockerfilePath: Dockerfile    # Look for Dockerfile in: gitUri/contextDir/dockerfilePath
+  output:
+    to:
+      kind: ImageStreamTag
+      name: my-custom-ace-image:latest
+      namespace: ar-cp4i-ace-demo
